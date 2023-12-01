@@ -3,14 +3,14 @@ const DATA: &str = include_str!("../data/final/day1.txt");
 #[test]
 fn test_part1() {
     const DATA_PART1: &str = include_str!("../data/test/day1_part1.txt");
-    assert!(run1(DATA_PART1) == 142);
+    assert!(part1(DATA_PART1) == 142);
 }
 #[test]
 fn test_part2() {
     const DATA_PART2: &str = include_str!("../data/test/day1_part2.txt");
-    assert!(run2(DATA_PART2) == 281);
+    assert!(part2(DATA_PART2) == 281);
 }
-pub fn run1(data: &str) -> u32 {
+pub fn part1(data: &str) -> u32 {
     let data = data.split('\n');
     let mut total = 0;
     for i in data {
@@ -32,7 +32,7 @@ pub fn run1(data: &str) -> u32 {
 const NUMBERS: [&str; 9] = [
     "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
 ];
-pub fn run2(data: &str) -> usize {
+pub fn part2(data: &str) -> usize {
     let data = data.split('\n');
     let mut total = 0;
     for i in data {
@@ -78,8 +78,8 @@ pub fn run2(data: &str) -> usize {
     total
 }
 pub fn main() {
-    let answer = run1(DATA);
+    let answer = part1(DATA);
     println!("Answer for day 1 part 1 is {}.", answer);
-    let answer = run2(DATA);
+    let answer = part2(DATA);
     println!("Answer for day 1 part 2 is {}.", answer);
 }
