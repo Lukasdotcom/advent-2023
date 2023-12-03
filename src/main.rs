@@ -3,6 +3,7 @@ use std::time::Instant;
 const DAY: u32 = 0;
 mod day1;
 mod day2;
+mod day3;
 fn main() {
     let now = Instant::now();
     if DAY == 0 || DAY == 1 {
@@ -10,6 +11,9 @@ fn main() {
     }
     if DAY == 0 || DAY == 2 {
         day2::main();
+    }
+    if DAY == 0 || DAY == 3 {
+        day3::main();
     }
     let elapsed_time = now.elapsed().as_micros();
     if DAY == 0 {
