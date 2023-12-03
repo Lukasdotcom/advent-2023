@@ -1,13 +1,13 @@
 // Used to get the data
-const DATA: &str = include_str!("../data/final/day2.txt");
+const DATA: &str = include_str!("../data/final/day02.txt");
 #[test]
 fn test_part1() {
-    const DATA_PART1: &str = include_str!("../data/test/day2_part1.txt");
+    const DATA_PART1: &str = include_str!("../data/test/day02_part1.txt");
     assert!(calc(DATA_PART1).0 == 8);
 }
 #[test]
 fn test_part2() {
-    const DATA_PART2: &str = include_str!("../data/test/day2_part2.txt");
+    const DATA_PART2: &str = include_str!("../data/test/day02_part2.txt");
     assert!(calc(DATA_PART2).1 == 2286);
 }
 fn valid_line(line: &str) -> (bool, (usize, usize, usize)) {

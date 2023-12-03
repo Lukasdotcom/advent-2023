@@ -1,13 +1,13 @@
 // Used to get the data
-const DATA: &str = include_str!("../data/final/day3.txt");
+const DATA: &str = include_str!("../data/final/day03.txt");
 #[test]
 fn test_part1() {
-    const DATA_PART1: &str = include_str!("../data/test/day3.txt");
+    const DATA_PART1: &str = include_str!("../data/test/day03.txt");
     assert!(calc(DATA_PART1).0 == 4361);
 }
 #[test]
 fn test_part2() {
-    const DATA_PART2: &str = include_str!("../data/test/day3.txt");
+    const DATA_PART2: &str = include_str!("../data/test/day03.txt");
     assert!(calc(DATA_PART2).1 == 467835);
 }
 fn neighbors(i: usize, j: usize, data: &[Vec<char>]) -> [(Option<&char>, (usize, usize)); 8] {

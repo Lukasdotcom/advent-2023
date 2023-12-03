@@ -1,19 +1,19 @@
 use std::time::Instant;
 // The day to show (0 means all of them)
 const DAY: u32 = 0;
-mod day1;
-mod day2;
-mod day3;
+mod day01;
+mod day02;
+mod day03;
 fn main() {
     let now = Instant::now();
     if DAY == 0 || DAY == 1 {
-        day1::main();
+        day01::main();
     }
     if DAY == 0 || DAY == 2 {
-        day2::main();
+        day02::main();
     }
     if DAY == 0 || DAY == 3 {
-        day3::main();
+        day03::main();
     }
     let elapsed_time = now.elapsed().as_micros();
     if DAY == 0 {
