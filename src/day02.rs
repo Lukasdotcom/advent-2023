@@ -94,6 +94,6 @@ pub fn calc(data: &str) -> (usize, usize) {
 }
 pub fn main() {
     let (answer1, answer2) = calc(DATA);
-    println!("Answer for day 1 part 1 is {}.", answer1);
-    println!("Answer for day 1 part 2 is {}.", answer2);
+    println!("Answer for day 2 part 1 is {}.", answer1);
+    println!("Answer for day 2 part 2 is {}.", answer2);
 }

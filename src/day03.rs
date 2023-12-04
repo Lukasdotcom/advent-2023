@@ -136,6 +136,6 @@ fn count_neighbors(i: usize, j: usize, data: &[Vec<char>]) -> usize {
 }
 pub fn main() {
     let (answer1, answer2) = calc(DATA);
-    println!("Answer for day 1 part 1 is {}.", answer1);
-    println!("Answer for day 1 part 2 is {}.", answer2);
+    println!("Answer for day 3 part 1 is {}.", answer1);
+    println!("Answer for day 3 part 2 is {}.", answer2);
 }
