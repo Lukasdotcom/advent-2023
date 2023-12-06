@@ -144,6 +144,6 @@ fn part2(data: &str) -> usize {
     seeds.into_iter().map(|x| x.0).min().unwrap()
 }
 pub fn main() {
-    println!("Answer for day 4 part 1 is {}.", part1(DATA));
-    println!("Answer for day 4 part 2 is {}.", part2(DATA));
+    println!("Answer for day 5 part 1 is {}.", part1(DATA));
+    println!("Answer for day 5 part 2 is {}.", part2(DATA));
 }
