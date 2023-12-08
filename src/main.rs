@@ -7,30 +7,28 @@ mod day03;
 mod day04;
 mod day05;
 mod day06;
+mod day07;
 fn main() {
+    let tasks: [fn(); 7] = [
+        day01::main,
+        day02::main,
+        day03::main,
+        day04::main,
+        day05::main,
+        day06::main,
+        day07::main,
+    ];
     let now = Instant::now();
-    if DAY == 0 || DAY == 1 {
-        day01::main();
-    }
-    if DAY == 0 || DAY == 2 {
-        day02::main();
-    }
-    if DAY == 0 || DAY == 3 {
-        day03::main();
-    }
-    if DAY == 0 || DAY == 4 {
-        day04::main();
-    }
-    if DAY == 0 || DAY == 5 {
-        day05::main();
-    }
-    if DAY == 0 || DAY == 6 {
-        day06::main();
-    }
-    let elapsed_time = now.elapsed().as_micros();
     if DAY == 0 {
+        for task in tasks {
+            task();
+        }
+        let elapsed_time = now.elapsed().as_micros();
         println!("All the days took {elapsed_time} µs")
     } else {
+        #[allow(arithmetic_overflow)]
+        tasks[DAY as usize - 1]();
+        let elapsed_time = now.elapsed().as_micros();
         println!("Day {DAY} took {elapsed_time} µs")
     }
 }
