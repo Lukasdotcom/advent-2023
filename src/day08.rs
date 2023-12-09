@@ -5,14 +5,14 @@ const DATA: &str = include_str!("../data/final/day08.txt");
 #[test]
 fn test_part1() {
     const DATA_PARTA: &str = include_str!("../data/test/day08a.txt");
-    assert!(part1(DATA_PARTA) == 2);
+    assert!(calc(DATA_PARTA).0 == 2);
     const DATA_PARTB: &str = include_str!("../data/test/day08b.txt");
-    assert!(part1(DATA_PARTB) == 6);
+    assert!(calc(DATA_PARTB).0 == 6);
 }
 #[test]
 fn test_part2() {
     const DATA_PART2: &str = include_str!("../data/test/day08c.txt");
-    assert!(part2(DATA_PART2) == 6);
+    assert!(calc(DATA_PART2).1 == 6);
 }
 #[test]
 fn test_lcm() {
@@ -32,11 +32,6 @@ fn gen_map(data: &str) -> HashMap<String, (String, String)> {
         map.insert(key.to_owned(), (left.to_owned(), right.to_owned()));
     }
     map
-}
-fn part1(data: &str) -> usize {
-    let (instructions, map) = data.split_once("\n\n").unwrap();
-    let map = gen_map(map);
-    get_distance(&map, "AAA", instructions)
 }
 fn get_distance(
     map: &HashMap<String, (String, String)>,
@@ -104,18 +99,24 @@ fn gen_primes(n: usize) -> Vec<usize> {
     }
     primes
 }
-fn part2(data: &str) -> usize {
+fn calc(data: &str) -> (usize, usize) {
     let (instructions, map) = data.split_once("\n\n").unwrap();
     let map = gen_map(map);
     let mut count = vec![];
+    let mut part1 = 0;
     for str in map.keys() {
         if str.chars().last().expect("empty string") == 'A' {
-            count.push(get_distance(&map, str, instructions));
+            let result = get_distance(&map, str, instructions);
+            if str == "AAA" {
+                part1 = result;
+            }
+            count.push(result);
         }
     }
-    lcm(count)
+    (part1, lcm(count))
 }
 pub fn main() {
-    println!("Answer for day 8 part 1 is {}.", part1(DATA));
-    println!("Answer for day 8 part 2 is {}.", part2(DATA));
+    let (part1, part2) = calc(DATA);
+    println!("Answer for day 8 part 1 is {}.", part1);
+    println!("Answer for day 8 part 2 is {}.", part2);
 }
