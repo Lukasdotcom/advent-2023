@@ -10,8 +10,9 @@ mod day06;
 mod day07;
 mod day08;
 mod day09;
+mod day10;
 fn main() {
-    let tasks: [fn(); 9] = [
+    let tasks: [fn(); 10] = [
         day01::main,
         day02::main,
         day03::main,
@@ -21,6 +22,7 @@ fn main() {
         day07::main,
         day08::main,
         day09::main,
+        day10::main,
     ];
     let now = Instant::now();
     if DAY == 0 {
