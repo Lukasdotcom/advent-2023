@@ -1,6 +1,6 @@
 use std::time::Instant;
 // The day to show (0 means all of them)
-const DAY: u32 = 13;
+const DAY: u32 = 0;
 mod day01;
 mod day02;
 mod day03;
@@ -14,8 +14,9 @@ mod day10;
 mod day11;
 mod day12;
 mod day13;
+mod day14;
 fn main() {
-    let tasks: [fn(); 13] = [
+    let tasks: [fn(); 14] = [
         day01::main,
         day02::main,
         day03::main,
@@ -29,6 +30,7 @@ fn main() {
         day11::main,
         day12::main,
         day13::main,
+        day14::main,
     ];
     let now = Instant::now();
     if DAY == 0 {
