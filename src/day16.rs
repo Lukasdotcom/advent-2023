@@ -112,37 +112,96 @@ fn travel_path(
         }
     }
 }
+fn add_to_edges(
+    position: &Position,
+    edges_visited: &mut HashSet<Position>,
+    max_x: i32,
+    max_y: i32,
+) {
+    if position.x == 0 && position.direction == Direction::Left {
+        edges_visited.insert(Position {
+            x: position.x,
+            y: position.y,
+            direction: Direction::Right,
+        });
+    } else if position.x == max_x && position.direction == Direction::Right {
+        edges_visited.insert(Position {
+            x: position.x,
+            y: position.y,
+            direction: Direction::Left,
+        });
+    } else if position.y == 0 && position.direction == Direction::Up {
+        edges_visited.insert(Position {
+            x: position.x,
+            y: position.y,
+            direction: Direction::Down,
+        });
+    } else if position.y == max_y && position.direction == Direction::Down {
+        edges_visited.insert(Position {
+            x: position.x,
+            y: position.y,
+            direction: Direction::Up,
+        });
+    }
+}
 fn calc(data: &str) -> (usize, usize) {
     let map: Vec<Vec<char>> = data.lines().map(|x| x.chars().collect()).collect();
     let mut part1 = 0;
     let mut part2 = part1;
+    let mut edges_visited: HashSet<Position> = HashSet::new();
     for y in 0..map.len() {
         let position = Position {
             x: 0,
             y: y as i32,
             direction: Direction::Right,
         };
-        let visited: HashSet<Position> = HashSet::new();
-        let visited = travel_path(&map, position, visited);
-        let visited: HashSet<(i32, i32)> = visited.iter().map(|x| (x.x, x.y)).collect();
-        let maybe_part2 = visited.len();
-        if y == 0 {
-            part1 = maybe_part2;
-        }
-        if maybe_part2 > part2 {
-            part2 = maybe_part2;
+        if !edges_visited.contains(&position) {
+            let visited: HashSet<Position> = HashSet::new();
+            let visited = travel_path(&map, position, visited);
+            let visited: HashSet<(i32, i32)> = visited
+                .iter()
+                .map(|x| {
+                    add_to_edges(
+                        x,
+                        &mut edges_visited,
+                        map[0].len() as i32 - 1,
+                        map.len() as i32 - 1,
+                    );
+                    (x.x, x.y)
+                })
+                .collect();
+            let maybe_part2 = visited.len();
+            if y == 0 {
+                part1 = maybe_part2;
+            }
+            if maybe_part2 > part2 {
+                part2 = maybe_part2;
+            }
         }
         let position = Position {
             x: map[0].len() as i32 - 1,
             y: y as i32,
             direction: Direction::Left,
         };
-        let visited: HashSet<Position> = HashSet::new();
-        let visited = travel_path(&map, position, visited);
-        let visited: HashSet<(i32, i32)> = visited.iter().map(|x| (x.x, x.y)).collect();
-        let maybe_part2 = visited.len();
-        if maybe_part2 > part2 {
-            part2 = maybe_part2;
+        if !edges_visited.contains(&position) {
+            let visited: HashSet<Position> = HashSet::new();
+            let visited = travel_path(&map, position, visited);
+            let visited: HashSet<(i32, i32)> = visited
+                .iter()
+                .map(|x| {
+                    add_to_edges(
+                        x,
+                        &mut edges_visited,
+                        map[0].len() as i32 - 1,
+                        map.len() as i32 - 1,
+                    );
+                    (x.x, x.y)
+                })
+                .collect();
+            let maybe_part2 = visited.len();
+            if maybe_part2 > part2 {
+                part2 = maybe_part2;
+            }
         }
     }
     for x in 0..map.len() {
@@ -151,24 +210,50 @@ fn calc(data: &str) -> (usize, usize) {
             y: 0,
             direction: Direction::Down,
         };
-        let visited: HashSet<Position> = HashSet::new();
-        let visited = travel_path(&map, position, visited);
-        let visited: HashSet<(i32, i32)> = visited.iter().map(|x| (x.x, x.y)).collect();
-        let maybe_part2 = visited.len();
-        if maybe_part2 > part2 {
-            part2 = maybe_part2;
+        if !edges_visited.contains(&position) {
+            let visited: HashSet<Position> = HashSet::new();
+            let visited = travel_path(&map, position, visited);
+            let visited: HashSet<(i32, i32)> = visited
+                .iter()
+                .map(|x| {
+                    add_to_edges(
+                        x,
+                        &mut edges_visited,
+                        map[0].len() as i32 - 1,
+                        map.len() as i32 - 1,
+                    );
+                    (x.x, x.y)
+                })
+                .collect();
+            let maybe_part2 = visited.len();
+            if maybe_part2 > part2 {
+                part2 = maybe_part2;
+            }
         }
         let position = Position {
             x: x as i32,
             y: map.len() as i32 - 1,
             direction: Direction::Up,
         };
-        let visited: HashSet<Position> = HashSet::new();
-        let visited = travel_path(&map, position, visited);
-        let visited: HashSet<(i32, i32)> = visited.iter().map(|x| (x.x, x.y)).collect();
-        let maybe_part2 = visited.len();
-        if maybe_part2 > part2 {
-            part2 = maybe_part2;
+        if !edges_visited.contains(&position) {
+            let visited: HashSet<Position> = HashSet::new();
+            let visited = travel_path(&map, position, visited);
+            let visited: HashSet<(i32, i32)> = visited
+                .iter()
+                .map(|x| {
+                    add_to_edges(
+                        x,
+                        &mut edges_visited,
+                        map[0].len() as i32 - 1,
+                        map.len() as i32 - 1,
+                    );
+                    (x.x, x.y)
+                })
+                .collect();
+            let maybe_part2 = visited.len();
+            if maybe_part2 > part2 {
+                part2 = maybe_part2;
+            }
         }
     }
     (part1, part2)
