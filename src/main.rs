@@ -1,4 +1,4 @@
-use std::time::Instant;
+use std::time::{Duration, Instant};
 // The day to show (0 means all of them)
 const DAY: u32 = 0;
 mod day01;
@@ -45,12 +45,27 @@ fn main() {
         for task in tasks {
             task();
         }
-        let elapsed_time = now.elapsed().as_micros();
-        println!("All the days took {elapsed_time} µs")
+        print_data("All the days", now.elapsed());
     } else {
         #[allow(arithmetic_overflow)]
         tasks[DAY as usize - 1]();
-        let elapsed_time = now.elapsed().as_micros();
-        println!("Day {DAY} took {elapsed_time} µs")
+        print_data(&format!("Day {DAY}"), now.elapsed());
+    }
+}
+fn print_data(data: &str, time: Duration) {
+    let time = time.as_nanos() as f32;
+    let digits = (time).log10().ceil() as usize;
+    match digits {
+        0..=3 => println!("{}: {} ns", data, time),
+        4 => println!("{}: {:.3} μs", data, time / 1_000.0),
+        5 => println!("{}: {:.2} μs", data, time / 1_000.0),
+        6 => println!("{}: {:.1} μs", data, time / 1_000.0),
+        7 => println!("{}: {:.3} ms", data, time / 1_000_000.0),
+        8 => println!("{}: {:.2} ms", data, time / 1_000_000.0),
+        9 => println!("{}: {:.1} ms", data, time / 1_000_000.0),
+        10 => println!("{}: {:.3} s", data, time / 1_000_000_000.0),
+        11 => println!("{}: {:.2} s", data, time / 1_000_000_000.0),
+        12 => println!("{}: {:.1} s", data, time / 1_000_000_000.0),
+        _ => println!("{}: {:.0} s", data, time / 1_000_000_000.0),
     }
 }
