@@ -55,7 +55,7 @@ fn get_distance(
     }
     count
 }
-fn lcm(a: Vec<usize>) -> usize {
+pub fn lcm(a: Vec<usize>) -> usize {
     let mut prime_factorization: Vec<usize> = vec![];
     let primes = gen_primes(*a.iter().max().unwrap());
     for i in a {
