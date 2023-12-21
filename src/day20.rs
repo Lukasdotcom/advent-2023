@@ -164,7 +164,7 @@ fn calc(data: &str, part2: bool) -> (usize, usize) {
     (high_pulse * low_pulse, part2)
 }
 pub fn main() {
-    let (part1, part2) = calc(DATA, false);
+    let (part1, part2) = calc(DATA, true);
     println!("Answer for day 20 part 1 is {}.", part1);
     println!("Answer for day 20 part 2 is {}.", part2);
 }
