@@ -23,8 +23,9 @@ mod day19;
 mod day20;
 mod day21;
 mod day22;
+mod day23;
 fn main() {
-    let tasks: [fn(); 22] = [
+    let tasks: [fn(); 23] = [
         day01::main,
         day02::main,
         day03::main,
@@ -47,6 +48,7 @@ fn main() {
         day20::main,
         day21::main,
         day22::main,
+        day23::main,
     ];
     let now = Instant::now();
     if DAY == 0 {

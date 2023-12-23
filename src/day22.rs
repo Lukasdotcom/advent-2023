@@ -162,5 +162,4 @@ pub fn main() {
     let (part1, part2) = calc(DATA);
     println!("Answer for day 22 part 1 is {}.", part1);
     println!("Answer for day 22 part 2 is {}.", part2);
-    // assert!(part2 == 103010);
 }
