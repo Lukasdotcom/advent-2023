@@ -285,19 +285,25 @@ fn find_points(map: &[Vec<char>]) -> (usize, Vec<Point>) {
     }
     (end_point_id, points)
 }
-fn find_worst_path(points: &[Point], visited: Vec<usize>, end: usize, distance: usize) -> usize {
-    let current = visited[visited.len() - 1];
+fn find_worst_path(
+    points: &[Point],
+    current: usize,
+    visited: u64,
+    end: usize,
+    distance: usize,
+) -> usize {
     if current == end {
         return distance;
     }
     let current = &points[current];
     let mut max = 0;
     for neighbor in &current.neighbors {
-        if !visited.contains(&neighbor.id) {
-            let mut visited = visited.clone();
-            visited.push(neighbor.id);
+        if 1 << neighbor.id & visited == 0 {
+            let mut visited = visited;
+            visited |= 1 << neighbor.id;
             max = max.max(find_worst_path(
                 points,
+                neighbor.id,
                 visited,
                 end,
                 distance + neighbor.dist,
@@ -305,11 +311,12 @@ fn find_worst_path(points: &[Point], visited: Vec<usize>, end: usize, distance: 
         }
     }
     for neighbor in &current.reverse_neighbors {
-        if !visited.contains(&neighbor.id) {
-            let mut visited = visited.clone();
-            visited.push(neighbor.id);
+        if 1 << neighbor.id & visited == 0 {
+            let mut visited = visited;
+            visited |= 1 << neighbor.id;
             max = max.max(find_worst_path(
                 points,
+                neighbor.id,
                 visited,
                 end,
                 distance + neighbor.dist,
@@ -334,7 +341,9 @@ fn calc(data: &str) -> (usize, usize) {
         }
     }
     let part1 = ratings[end_point_id];
-    let part2 = find_worst_path(&points, vec![0], end_point_id, 0);
+    // Due to using a u64 for the visited bitmask 64 is the maximum amount of locations. You can switch it with a u128 if you need more, but for this problem 64 is enough.
+    assert!(points.len() < 64);
+    let part2 = find_worst_path(&points, 0, 1, end_point_id, 0);
     (part1, part2)
 }
 
